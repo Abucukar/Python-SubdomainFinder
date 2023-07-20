@@ -1,4 +1,4 @@
-import pip._vendor.requests
+import requests
 import urllib.parse
 import socket
 
@@ -30,8 +30,8 @@ for subdomain in subdomainler:
 
     try:
         # Hata verirse subdomain yoktur.
-        pip._vendor.requests.get(url)
-    except pip._vendor.requests.ConnectionError:
+        requests.get(url)
+    except requests.ConnectionError:
         # Subdomain yoksa bir şey yapma
         pass
     else:
