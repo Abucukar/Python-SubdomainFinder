@@ -1,4 +1,4 @@
-import requests
+import pip._vendor.requests
 import urllib.parse
 import socket
 
@@ -8,7 +8,7 @@ domain = input("Taranacak Domaini Girin..:")   # Taranacak domaini alır
 subdomainIp = ""
 subdomainPort = ""
 hedefIP=""
-
+##portlar_listesi=[20,21,22,23,25,53,69,80,143,443]
 
 file = open("orneksublar.txt")   # Subdomain wordlistini okur
 
@@ -30,8 +30,8 @@ for subdomain in subdomainler:
 
     try:
         # Hata verirse subdomain yoktur.
-        requests.get(url)
-    except requests.ConnectionError:
+        pip._vendor.requests.get(url)
+    except pip._vendor.requests.ConnectionError:
         # Subdomain yoksa bir şey yapma
         pass
     else:
@@ -40,7 +40,10 @@ for subdomain in subdomainler:
         subdomainIp = socket.gethostbyname(url2)
         print("Subdomain IP-->",subdomainIp)
         hedefIP= (url2)
-        ###sonliste = [url, subdomainIp]
+        
+        kesfedilen_subdomainler.append(url)
+        kesfedilen_subdomainler.append(subdomainIp)
+        
         for port in range(70, 450):
     
             # İstemci yapılandırması
@@ -48,17 +51,15 @@ for subdomain in subdomainler:
             client.settimeout(0.05)
             # Port açıksa yazdırır
             if client.connect_ex((hedefIP, port)) == 0:
-                ###sonliste.append(port)
-                print("Subdomain Port-->", port)
                 
-        # Keşfedilen subdomain,ip ve portu ekler
-        kesfedilen_subdomainler.append(url)
-        kesfedilen_subdomainler.append(subdomainIp)
-        kesfedilen_subdomainler.append(port)
-        ###print(sonliste)
+                print("Subdomain Port-->", port)
+                kesfedilen_subdomainler.append(port)# Keşfedilen subdomain,ip ve portu ekler
+                
         
+            
 # Keşfedilenleri dosyaya ekler
 with open("kesfedilen_subdomainler.txt", "w") as f:
     for subdomain in kesfedilen_subdomainler:
         print(subdomain, file=f)
+
         
