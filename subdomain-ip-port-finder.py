@@ -8,7 +8,7 @@ domain = input("Taranacak Domaini Girin..:")   # Taranacak domaini alır
 subdomainIp = ""
 subdomainPort = ""
 hedefIP=""
-##portlar_listesi=[20,21,22,23,25,53,69,80,143,443]
+
 
 file = open("orneksublar.txt")   # Subdomain wordlistini okur
 
@@ -44,7 +44,7 @@ for subdomain in subdomainler:
         kesfedilen_subdomainler.append(url)
         kesfedilen_subdomainler.append(subdomainIp)
         
-        for port in range(70, 450):
+        for port in range(70, 450): ##portlar_listesi=[20,21,22,23,25,53,69,80,143,443]
     
             # İstemci yapılandırması
             client = socket.socket()
@@ -61,5 +61,3 @@ for subdomain in subdomainler:
 with open("kesfedilen_subdomainler.txt", "w") as f:
     for subdomain in kesfedilen_subdomainler:
         print(subdomain, file=f)
-
-        
